@@ -6,6 +6,35 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawMultSeries);
+
+function drawMultSeries() {
+      var data = google.visualization.arrayToDataTable([
+        ['Graph', 'Errores', 'B'],
+        ['Pregunta', 5, 10],
+      ]);
+
+      var options = {
+        title: 'Aciertos y errores por pregunta',
+        chartArea: {width: '50%',aling:'center'},
+        hAxis: {
+          title: 'Aciertos / Errores',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'Graph'
+        }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+
   </head>
   <body>
     <noscript>
@@ -13,5 +42,6 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
   </body>
 </html>
